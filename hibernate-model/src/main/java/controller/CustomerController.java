@@ -62,6 +62,7 @@ public class CustomerController {
 		else {
 			customerService.updateCustomer(customer);
 		}
+		//customerService.addCustomer(customer);
 		return new ModelAndView("redirect:/Customer/newCustomer");
 	}
 	
