@@ -37,7 +37,7 @@ public class RefrigeratorController {
 	}
 	
 	@RequestMapping(value="/newRefrigerator",method = RequestMethod.GET)
-	public ModelAndView newTelevision(ModelAndView model) {
+	public ModelAndView newRefrigerator(ModelAndView model) {
 		Refrigerator Refrigerator = new Refrigerator();
 		model.addObject(Refrigerator);
 		model.setViewName("RefrigeratorForm");
