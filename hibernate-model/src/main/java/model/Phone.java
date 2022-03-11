@@ -94,7 +94,6 @@ public class Phone extends Product implements Serializable{
 	
 	@Override
 	public void display() {
-		// TODO Auto-generated method stub
 		System.out.println("Product_Id : " + getProductID() +", Product_Name : " +getName() +", Product_Description : " +getDescription() +", Product_Price : " +getPrice() 
 		+", Quantity : " +getQuantity()+ ", RAM : " + this.ram +", ROM : " + this.rom  +", Processor : " +this.processor +", Colour : " +this.colour +", Display Size : " +this.size +
 		", Camera : " +this.camera + ", Battery : " +this.battery);

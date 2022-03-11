@@ -8,6 +8,8 @@
 </head>
 <body>
 <a href="/hibernate-model/Laptop/">About Laptop</a><br>
-<a href="/hibernate-model/Phone/">About Phone</a>
+<a href="/hibernate-model/Phone/">About Phone</a><br>
+<a href="/hibernate-model/Television/">About Television</a><br>
+<a href="/hibernate-model/Mouse/">About Mouse</a><br>
 </body>
 </html>
