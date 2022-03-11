@@ -15,7 +15,7 @@
 		<table border="1">
 
 			<th>Name</th>
-			<th>Email</th>
+			<th>Electronic mail</th>
 			<th>Address</th>
 			<th>Telephone</th>
 			<th>Action</th>
