@@ -37,15 +37,39 @@
 					<td>${mouse.colour}</td>
 					<td>${mouse.DPI}</td>
 					<td>${mouse.lifeStyle}</td>
-					<td><a href="editMouse?id=${mouse.productID}">Edit</a>
+					<td>
+					 <%
+					   if(session.getAttribute("role").equals("admin")){
+					   %>
+					   <a href="editMouse?id=${mouse.productID}">Edit</a>
 						&nbsp;&nbsp;&nbsp;&nbsp; <a
-						href="deleteMouse?id=${mouse.productID}">Delete</a></td>
-
+						href="deleteMouse?id=${mouse.productID}">Delete</a>
+					  <%
+					   }
+					   else{
+						   %>
+						   <form action="/hibernate-model/addToCart" method="get">
+						   <input type="hidden" name="productID" value="${mouse.productID}">
+						   <input type="number" name="quantity"> Quantity &nbsp;&nbsp;
+						   <input type="submit" value="Add to Cart">
+						   </form>
+						    &nbsp;&nbsp;&nbsp;&nbsp; <a
+						    href="purchaseProduct?id=${mouse.productID}">Purchase</a>
+						   <%
+					   }
+					  %>
+                    </td>
 				</tr>
 			</c:forEach>
 		</table>
 		<h4>
-			New Mouse Product <a href="newMouse">here</a>
+		<%
+			 if(session.getAttribute("role").equals("admin")){
+			 %>
+			   New Mouse Product <a href="newMouse">here</a>
+			 <%
+			 }
+			 %>
 		</h4>
 	</div>
 </body>

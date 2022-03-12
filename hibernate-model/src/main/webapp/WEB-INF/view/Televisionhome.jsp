@@ -41,15 +41,42 @@
 					<td>${television.colour}</td>
 					<td>${television.extension}</td>
 					<td>${television.power}</td>
-					<td><a href="editTelevision?id=${television.productID}">Edit</a>
+					<td>
+					
+					 <%
+					   if(session.getAttribute("role").equals("admin")){
+					   %>
+					   	<a href="editTelevision?id=${television.productID}">Edit</a>
 						&nbsp;&nbsp;&nbsp;&nbsp; <a
-						href="deleteTelevision?id=${television.productID}">Delete</a></td>
+						href="deleteTelevision?id=${television.productID}">Delete</a>
+					  <%
+					   }
+					   else{
+						   %>
+						   <form action="/hibernate-model/addToCart" method="get">
+						   <input type="hidden" name="productID" value="${television.productID}">
+						   <input type="number" name="quantity"> Quantity &nbsp;&nbsp;
+						   <input type="submit" value="Add to Cart">
+						   </form>
+						    &nbsp;&nbsp;&nbsp;&nbsp; <a
+						    href="purchaseProduct?id=${television.productID}">Purchase</a>
+						   <%
+					   }
+					  %>
+				 </td>
 
 				</tr>
 			</c:forEach>
 		</table>
 		<h4>
-			New Television Product <a href="newTelevision">here</a>
+		<%
+			 if(session.getAttribute("role").equals("admin")){
+			 %>
+			   New Television Product <a href="newTelevision">here</a>
+			 <%
+			 }
+			 %> 
+			
 		</h4>
 	</div>
 </body>

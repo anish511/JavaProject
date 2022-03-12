@@ -43,15 +43,40 @@
 					<td>${phone.colour}</td>
 					<td>${phone.camera}</td>
 					<td>${phone.battery}</td>
-					<td><a href="editPhone?id=${phone.productID}">Edit</a>
+					<td>
+					
+					 <%
+					   if(session.getAttribute("role").equals("admin")){
+					   %>
+					   	<a href="editPhone?id=${phone.productID}">Edit</a>
 						&nbsp;&nbsp;&nbsp;&nbsp; <a
-						href="deletePhone?id=${phone.productID}">Delete</a></td>
-
+						href="deletePhone?id=${phone.productID}">Delete</a>
+					  <%
+					   }
+					   else{
+						   %>
+						   <form action="/hibernate-model/addToCart" method="get">
+						   <input type="hidden" name="productID" value="${phone.productID}">
+						   <input type="number" name="quantity"> Quantity &nbsp;&nbsp;
+						   <input type="submit" value="Add to Cart">
+						   </form>
+						    &nbsp;&nbsp;&nbsp;&nbsp; <a
+						    href="purchaseProduct?id=${phone.productID}">Purchase</a>
+						   <%
+					   }
+					  %>
+				 </td>
 				</tr>
 			</c:forEach>
 		</table>
 		<h4>
-			New Phone Product <a href="newPhone">here</a>
+		<%
+			 if(session.getAttribute("role").equals("admin")){
+			 %>
+			   New Phone Product <a href="newPhone">here</a>
+			 <%
+			 }
+			 %> 
 		</h4>
 	</div>
 </body>

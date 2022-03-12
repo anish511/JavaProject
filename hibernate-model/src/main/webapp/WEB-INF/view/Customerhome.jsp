@@ -39,7 +39,12 @@
 			</c:forEach>
 		</table>
 		<h4>
-			New Customer Register <a href="newCustomer">here</a>
+			New Customer Register <a href="newCustomer">here</a><br>
+			<a href="/hibernate-model/Laptop/">About Laptop</a><br>
+			<a href="/hibernate-model/Phone/">About Phone</a><br>
+			<a href="/hibernate-model/Television/">About Television</a><br>
+			<a href="/hibernate-model/Mouse/">About Mouse</a><br>
+			<a href="/hibernate-model/myCart/">My Cart</a>
 		</h4>
 	</div>
 </body>

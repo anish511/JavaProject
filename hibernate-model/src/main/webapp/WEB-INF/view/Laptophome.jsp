@@ -41,15 +41,41 @@
 					<td>${laptop.displaySize}</td>
 					<td>${laptop.colour}</td>
 					<td>${laptop.GPU}</td>
-					<td><a href="editLaptop?id=${laptop.productID}">Edit</a>
+					<td>
+					   <%
+					   if(session.getAttribute("role").equals("admin")){
+					   %>
+					   <a href="editLaptop?id=${laptop.productID}">Edit</a>
 						&nbsp;&nbsp;&nbsp;&nbsp; <a
-						href="deleteLaptop?id=${laptop.productID}">Delete</a></td>
+						href="deleteLaptop?id=${laptop.productID}">Delete</a>
+					  <%
+					   }
+					   else{
+						   %>
+						   <form action="/hibernate-model/addToCart" method="get">
+						   <input type="hidden" name="productID" value="${laptop.productID}">
+						   <input type="number" name="quantity"> Quantity &nbsp;&nbsp;
+						   <input type="submit" value="Add to Cart">
+						   </form>
+						    &nbsp;&nbsp;&nbsp;&nbsp; <a
+						    href="purchaseProduct?id=${laptop.productID}">Purchase</a>
+						   <%
+					   }
+					  %>
+						
+					</td>
 
 				</tr>
 			</c:forEach>
 		</table>
 		<h4>
-			New Laptop Product <a href="newLaptop">here</a>
+		<%
+			 if(session.getAttribute("role").equals("admin")){
+			 %>
+			   New Laptop Product <a href="newLaptop">here</a>
+			 <%
+			 }
+			 %>  
 		</h4>
 	</div>
 </body>

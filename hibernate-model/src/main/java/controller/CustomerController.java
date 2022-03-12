@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -77,6 +78,9 @@ public class CustomerController {
 			
 			for(Customer c: listCustomer) {
 				if(request.getParameter("password").equals(c.getPassword())) {
+					HttpSession session = request.getSession();
+					session.setAttribute("email", request.getParameter("email"));
+					session.setAttribute("role", "customer");
 					return model;
 				}
 			}
