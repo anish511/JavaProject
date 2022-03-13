@@ -36,14 +36,15 @@
 						   <input type="number" name="quantity" > Quantity <br>
 						   <input type="submit" value="Update">
 						</form>
-						&nbsp;&nbsp;&nbsp;&nbsp; <a
-						href="/deleteCart?id=${cart.cartId}">Delete</a></td>
+						&nbsp;&nbsp;&nbsp;&nbsp; 
+						<%-- <a
+						href="/hibernate-model/deleteCart?id=${cart.cartId}">Delete</a> --%></td>
 
 				</tr>
 			</c:forEach>
 		</table>
 		<h4>
-			<a href="purchase">Purchase</a>
+			<a href="/hibernate-model/orderCart">Purchase</a>
 		</h4>
 	</div>
 </body>

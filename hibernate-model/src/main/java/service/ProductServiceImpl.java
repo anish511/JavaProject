@@ -19,4 +19,10 @@ public class ProductServiceImpl implements ProductService{
 	public Product getProduct(int productid) {
 		return productDAO.getProduct(productid);
 	}
+	
+	@Override
+	@Transactional
+	public Product updateProduct(Product product) {
+		return productDAO.updateProduct(product);
+	}
 }

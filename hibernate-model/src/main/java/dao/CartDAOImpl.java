@@ -2,11 +2,13 @@ package dao;
 
 import java.util.List;
 
+import org.hibernate.SQLQuery;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import model.Cart;
+import model.Customer;
 
 @Repository
 public class CartDAOImpl implements CartDAO{
@@ -29,6 +31,15 @@ public class CartDAOImpl implements CartDAO{
 	@SuppressWarnings("unchecked")
 	public List<Cart> getAllCarts(){
 		List<Cart> listCart = sessionFactory.getCurrentSession().createQuery("from Cart").list();
+		return listCart;
+	}
+	
+	public List<Cart> getCartByUser(Customer customer){
+		String sql = "SELECT * FROM Cart WHERE customer_id = :e_nm";
+		SQLQuery query = sessionFactory.getCurrentSession().createSQLQuery(sql);
+		query.addEntity(Cart.class);
+		query.setParameter("e_nm", customer.getId());
+		List <Cart> listCart = query.list();
 		return listCart;
 	}
 	

@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import dao.CartDAO;
 import model.Cart;
+import model.Customer;
 
 
 @Service
@@ -40,6 +41,12 @@ public class CartServiceImpl implements CartService{
 	@Transactional
 	public Cart getCart(int cartid) {
 		return cartDAO.getCart(cartid);
+	}
+	
+	@Override
+	@Transactional
+	public List<Cart> getCartByUser(Customer customer){
+		return cartDAO.getCartByUser(customer);
 	}
 
 	@Override

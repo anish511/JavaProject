@@ -58,8 +58,12 @@
 						   <input type="number" name="quantity"> Quantity &nbsp;&nbsp;
 						   <input type="submit" value="Add to Cart">
 						   </form>
-						    &nbsp;&nbsp;&nbsp;&nbsp; <a
-						    href="purchaseProduct?id=${television.productID}">Purchase</a>
+						    &nbsp;&nbsp;&nbsp;&nbsp; 
+						    <form action="/hibernate-model/orderProduct" method="get">
+						   <input type="hidden" name="productID" value="${television.productID}">
+						   <input type="number" name="quantity"> Quantity &nbsp;&nbsp;
+						   <input type="submit" value="Purchase">
+						   </form>
 						   <%
 					   }
 					  %>
