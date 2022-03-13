@@ -10,6 +10,11 @@ import javax.persistence.Table;
 @Table(name = "refrigerator")
 public class Refrigerator extends Product implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Column
 	int capacity;
 	
@@ -24,6 +29,9 @@ public class Refrigerator extends Product implements Serializable {
 	
 	@Column
 	String doorstyle;
+	
+	@Column
+	String colour;
 
 	public int getCapacity() {
 		return capacity;
@@ -51,6 +59,14 @@ public class Refrigerator extends Product implements Serializable {
 
 	public int getStars() {
 		return stars;
+	}
+
+	public String getColour() {
+		return colour;
+	}
+
+	public void setColour(String colour) {
+		this.colour = colour;
 	}
 
 	public void setStars(int stars) {

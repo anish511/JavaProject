@@ -11,5 +11,6 @@
 <a href="/hibernate-model/Phone/">About Phone</a><br>
 <a href="/hibernate-model/Television/">About Television</a><br>
 <a href="/hibernate-model/Mouse/">About Mouse</a><br>
+<a href="/hibernate-model/Refrigerator/">About Refrigerator</a><br>
 </body>
 </html>

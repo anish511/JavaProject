@@ -1,5 +1,8 @@
 package controller;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.jboss.logging.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,7 +20,10 @@ public class AdminController {
 	}
 	
 	@RequestMapping(value="/")
-	public ModelAndView home(ModelAndView model) {
+	public ModelAndView home(ModelAndView model, HttpServletRequest request) {
+		
+		HttpSession session = request.getSession();
+		session.setAttribute("role", "admin");
 		model.setViewName("Adminhome");
 		return model;
 	}

@@ -41,8 +41,8 @@ public class RefrigeratorDAOImpl implements RefrigeratorDAO {
 	}
 
 	@Override
-	public Refrigerator getRefrigerator(int refrigeratorId) {
-		return (Refrigerator) sessionFactory.getCurrentSession().load(Refrigerator.class, refrigeratorId);
+	public Refrigerator getRefrigerator(int productid) {
+		return (Refrigerator) sessionFactory.getCurrentSession().get(Refrigerator.class, productid);
 	}
 
 }

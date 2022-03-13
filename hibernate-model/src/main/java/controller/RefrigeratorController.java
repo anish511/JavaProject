@@ -19,7 +19,7 @@ import service.RefrigeratorService;
 @RequestMapping(value = "/Refrigerator")
 public class RefrigeratorController {
 	private static final Logger logger = Logger
-			.getLogger(TelevisionController.class);
+			.getLogger(RefrigeratorController.class);
 	
 	public RefrigeratorController() {
 		System.out.println("Refrigerator Controller");
