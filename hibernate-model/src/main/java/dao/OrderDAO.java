@@ -2,6 +2,7 @@ package dao;
 
 import java.util.List;
 
+import model.Customer;
 import model.Order;
 
 public interface OrderDAO {
@@ -9,6 +10,8 @@ public interface OrderDAO {
     public void addOrder(Order order);
 	
 	public List<Order> getAllOrders();
+	
+	public List<Order> getOrderByUser(Customer customer);
 	
 	public void deleteOrder(Integer orderId);
 

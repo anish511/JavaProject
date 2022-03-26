@@ -1,7 +1,9 @@
 package controller;
 
 import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -140,11 +142,38 @@ public class OrderController {
 			orderItem.setTotalPrice(c.getTotalPrice());
 			orderItem.setProduct(c.getProduct());
 			orderItemService.addOrderItem(orderItem);
-			
+			cartService.deleteCart(c.getCartId());
 		}
 		
 		ModelAndView model = new ModelAndView("Customerhome");
 		return model;
 	}
+	
+	@RequestMapping(value = "/showOrder")
+	public ModelAndView showOrder(ModelAndView model,HttpServletRequest request) {
+		
+		List<Order> orderList = null;
+		HttpSession session = request.getSession();
+        List<Customer> listCustomer = customerService.checkEmail((String)session.getAttribute("email"));
+		
+        for(Customer c: listCustomer) {
+			orderList = orderService.getOrderByUser(c);
+			break;
+		}
+        
+        List<OrderItem> listOrderItem = null;
+        Map<Order, List<OrderItem>> hm = new HashMap<Order, List<OrderItem>>();
+        
+        for(Order order: orderList) {
+        	listOrderItem = orderItemService.getOrderItemByOrder(order);
+        	hm.put(order,listOrderItem);
+        }
+        
+        model.addObject("Order",hm);
+        model.setViewName("Orderhome");
+        return model;
+	}
+	
+
 	
 }

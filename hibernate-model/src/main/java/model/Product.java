@@ -36,6 +36,9 @@ abstract public class Product implements Serializable {
 	
 	@Column
 	private int quantity;
+	
+	@Column
+	private String img;
 
 	public int getProductID() {
 		return productID;
@@ -75,6 +78,14 @@ abstract public class Product implements Serializable {
 
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
+	}
+
+	public String getImg() {
+		return img;
+	}
+
+	public void setImg(String img) {
+		this.img = img;
 	}
 
 	abstract public void display();

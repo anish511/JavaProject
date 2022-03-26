@@ -1,10 +1,22 @@
-<%@page isELIgnored="False"  language="java" contentType="text/html; charset=UTF-8"
+<%@page isELIgnored="false" contentType="text/html; charset=ISO-8859-1"  language="java" 
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%
+	if(session.getAttribute("role").equals("admin")){
+		%>
+		<%@ include file = "adminNavbar.jsp" %>
+		<%
+	}else{
+		%>
+		<%@ include file = "navbar.jsp" %>
+		<% 
+	}
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>New Mouse</title>
 </head>
@@ -46,6 +58,10 @@
             <tr>
                 <td>Life Style:</td>
                 <td><form:input  path="lifeStyle" /></td>
+            </tr>
+            <tr>
+               <td>Image Url:</td>
+               <td><form:input path="img" /></td>
             </tr>
             <tr>
                 <td colspan="2" align="center"><input type="submit" value="Save"></td>

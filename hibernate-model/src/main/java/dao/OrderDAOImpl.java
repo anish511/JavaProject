@@ -2,10 +2,13 @@ package dao;
 
 import java.util.List;
 
+import org.hibernate.SQLQuery;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import model.Cart;
+import model.Customer;
 import model.Order;
 
 @Repository
@@ -41,5 +44,14 @@ public class OrderDAOImpl implements OrderDAO{
 	public Order updateOrder(Order order) {
 		sessionFactory.getCurrentSession().update(order);
 		return order;
+	}
+	
+	public List<Order> getOrderByUser(Customer customer){
+		String sql = "SELECT * FROM Orders WHERE customer_id = :e_nm";
+		SQLQuery query = sessionFactory.getCurrentSession().createSQLQuery(sql);
+		query.addEntity(Order.class);
+		query.setParameter("e_nm", customer.getId());
+		List <Order> listOrder = query.list();
+		return listOrder;
 	}
 }

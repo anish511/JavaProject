@@ -33,8 +33,7 @@ public class CustomerController {
 	
 	@RequestMapping(value = "/")
 	public ModelAndView listCustomer(ModelAndView model) throws IOException {
-		List<Customer> listCustomer = customerService.getAllCustomers();
-		model.addObject("listCustomer",listCustomer);
+		
 		model.setViewName("Customerhome");
 		return model;
 	}
@@ -50,58 +49,77 @@ public class CustomerController {
 	@RequestMapping(value = "/saveCustomer", method = RequestMethod.POST)
 	public ModelAndView saveCustomer(@ModelAttribute Customer customer) {
 		
-		List<Customer> listCustomer = customerService.checkEmail(customer.getEmail());
-		if(!listCustomer.isEmpty()) {
-			ModelAndView model = new ModelAndView("CustomerForm");
-			model.addObject("message", "Oops... Email Already Exists");
-			return model;
-		}
-		
 		if (customer.getId() == 0) {
+			List<Customer> listCustomer = customerService.checkEmail(customer.getEmail());
+			if(!listCustomer.isEmpty()) {
+				ModelAndView model = new ModelAndView("CustomerForm");
+				model.addObject("message", "Oops... Email Already Exists");
+				return model;
+			}
 			customerService.addCustomer(customer);
 		}
 		else {
-			customerService.updateCustomer(customer);
-		}
-		//customerService.addCustomer(customer);
-		return new ModelAndView("redirect:/Customer/newCustomer");
-	}
-	
-	
-	@RequestMapping(value = "/CustomerLogin", method = RequestMethod.POST)
-	public ModelAndView CustomerLogin(HttpServletRequest request) {
-		int flag = 0;
-		List<Customer> listCustomer = customerService.checkEmail(request.getParameter("email"));
-		if(!listCustomer.isEmpty()) {
-			flag = 1;
-			ModelAndView model = new ModelAndView("Customerhome");
-			
+			List<Customer> listCustomer = customerService.checkEmail(customer.getEmail());
 			for(Customer c: listCustomer) {
-				if(request.getParameter("password").equals(c.getPassword())) {
-					HttpSession session = request.getSession();
-					session.setAttribute("email", request.getParameter("email"));
-					session.setAttribute("role", "customer");
+				if(c.getId() != customer.getId()) {
+					ModelAndView model = new ModelAndView("CustomerForm");
+					model.addObject("message", "Oops... Email Already Exists");
 					return model;
 				}
 			}
-			
+			customerService.updateCustomer(customer);
+			ModelAndView model = new ModelAndView("CustomerForm");
+			model.addObject(customer);
+			model.addObject("message", "Successfully...Updated Profile");
+			return model;
 		}
-		
-		ModelAndView modell = new ModelAndView("CustomerLogin");
-		if(flag == 0) {
-		    modell.addObject("message","Email Incorrect...");
-		}
-		else {
-			modell.addObject("message","Password Incorrect...");
-		}
-		
-		return modell;
-	}
-	
-	@RequestMapping(value = "/CustomerLogin", method = RequestMethod.GET)
-	public ModelAndView Customerlogin() {
+		//customerService.addCustomer(customer);
 		return new ModelAndView("CustomerLogin");
 	}
+	
+	
+//	@RequestMapping(value = "/CustomerLogin", method = RequestMethod.POST)
+//	public ModelAndView CustomerLogin(HttpServletRequest request) {
+//		int flag = 0;
+//		List<Customer> listCustomer = customerService.checkEmail(request.getParameter("email"));
+//		if(!listCustomer.isEmpty()) {
+//			flag = 1;
+//			ModelAndView model = new ModelAndView("Customerhome");
+//			
+//			for(Customer c: listCustomer) {
+//				if(request.getParameter("password").equals(c.getPassword())) {
+//					HttpSession session = request.getSession();
+//					session.setAttribute("email", request.getParameter("email"));
+//					session.setAttribute("role", c.getRole());
+//					
+//					if(c.getRole().equalsIgnoreCase("admin")) {
+//						model.setViewName("Adminhome");
+//					}
+//					else {
+//						model.setViewName("Customerhome");
+//					}
+//					
+//					return model;
+//				}
+//			}
+//			
+//		}
+//		
+//		ModelAndView modell = new ModelAndView("CustomerLogin");
+//		if(flag == 0) {
+//		    modell.addObject("message","Email Incorrect...");
+//		}
+//		else {
+//			modell.addObject("message","Password Incorrect...");
+//		}
+//		
+//		return modell;
+//	}
+//	
+//	@RequestMapping(value = "/CustomerLogin", method = RequestMethod.GET)
+//	public ModelAndView Customerlogin() {
+//		return new ModelAndView("CustomerLogin");
+//	}
 	
 	@RequestMapping(value = "/deleteCustomer", method = RequestMethod.GET)
 	public ModelAndView deleteCustomer(HttpServletRequest request) {
@@ -112,10 +130,14 @@ public class CustomerController {
 
 	@RequestMapping(value = "/editCustomer", method = RequestMethod.GET)
 	public ModelAndView editContact(HttpServletRequest request) {
-		int customerId = Integer.parseInt(request.getParameter("id"));
-		Customer customer = customerService.getCustomer(customerId);
+		HttpSession session = request.getSession();
+		List<Customer> listCustomer = customerService.checkEmail((String)session.getAttribute("email"));
 		ModelAndView model = new ModelAndView("UpdateCustomer");
-		model.addObject(customer);
+		for(Customer c: listCustomer) {
+			model.addObject(c);
+			break;
+		}
+		
 		model.setViewName("UpdateCustomer");
 		return model;
 	}

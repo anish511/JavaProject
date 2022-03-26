@@ -30,10 +30,10 @@ public class Cart implements Serializable{
 	@Column
 	private int quantity;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	private Product product;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	private Customer customer;
 	
 	public int getCartId() {

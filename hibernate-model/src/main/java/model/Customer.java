@@ -39,6 +39,12 @@ public class Customer implements Serializable {
 	
 	@Column
 	private String password;
+	
+	@Column
+	private String role;
+	
+	@Column
+	private String billingAddress;
 
 	public int getId() {
 		return id;
@@ -103,5 +109,22 @@ public class Customer implements Serializable {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+
+	public String getBillingAddress() {
+		return billingAddress;
+	}
+
+	public void setBillingAddress(String billingAddress) {
+		this.billingAddress = billingAddress;
+	}
+	
 
 }

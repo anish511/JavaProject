@@ -1,87 +1,173 @@
-<%@page isELIgnored="False" contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-   "http://www.w3.org/TR/html4/loose.dtd">
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1" isELIgnored="false"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
 
+<%
+	if(session.getAttribute("role").equals("admin")){
+		%>
+		<%@ include file = "adminNavbar.jsp" %>
+		<%
+	}else{
+		%>
+		<%@ include file = "navbar.jsp" %>
+		<% 
+	}
+%> 
+<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Refrigerator Management Screen</title>
+<meta charset="ISO-8859-1">
+<title>Refrigerator Management System</title>
+
+<style>
+.card:hover {
+	background: white;
+	box-shadow: 0px 15px 26px rgba(0, 0, 0, 0.8);
+	-webkit-transition: all 0.2s ease-in;
+	-moz-transition: all 0.2s ease-in;
+	-ms-transition: all 0.2s ease-in;
+	-o-transition: all 0.2s ease-in;
+	transition: all 0.2s ease-in;
+}
+
+.card{
+background: #0a2a43!important;
+color: white!important;
+margin-top: 25px;
+border-radius: 100px;
+}
+
+body{
+background: #c9e2f3!important;
+}
+</style>
+
 </head>
 <body>
-	<div align="center">
-		<h1>Refrigerator List</h1>
-		
-		<table border="1">
 
-            <th>Product ID</th>
-			<th>Name</th>
-			<th>Description</th>
-			<th>Quantity</th>
-			<th>Price</th>
-			<th>Capacity</th>
-			<th>Dimension</th>
-			<th>Cooling Technology</th>
-			<th>Stars</th>
-			<th>Door Style</th>
-			<th> Colour </th>
-			<th>Actions</th>
+<div class="container col-10 mt-5">
+		<div align="center" class="mb-5" style="margin-top: 20vh !important;">
+			<h2 class="mt-5">Refrigerator List</h2>
+		</div>
 
-			<c:forEach var="refrigerator" items="${listRefrigerator}">
-				<tr>
+        <c:if test = "${empty listRefrigerator}">
+			<div class="container col-8 mt-5 mb-4" style="margin-top: 15vh !important;">
+				<center><h1>No Products Available...</h1></center>
+			</div>
+        </c:if> 
+		<div class="container col-8 mt-5" style="margin-top: 15vh !important;">        
+			<%
+		    if(session.getAttribute("role").equals("admin")){
+		    %>
+				<div class="container col-3 mb-4">
+					<div class="row">
+						<div class="col"><a class="btn btn-primary" href="newRefrigerator">Add Refrigerator</a></div>
+					</div>
+				</div>
+			<%
+			}
+			%>
+		</div>
 
-					<td>${refrigerator.productID}</td>
-					<td>${refrigerator.name}</td>
-					<td>${refrigerator.description}</td>
-					<td>${refrigerator.quantity}</td>
-					<td>${refrigerator.price}</td>
-					<td>${refrigerator.capacity}</td>
-					<td>${refrigerator.dimension}</td>
-					<td>${refrigerator.coolingTech}</td>
-					<td>${refrigerator.stars}</td>
-					<td>${refrigerator.doorstyle}</td>
-					<td>${refrigerator.colour}</td>
-					<td>
-					
-					 <%
-					   if(session.getAttribute("role").equals("admin")){
-					   %>
-					   	<a href="editRefrigerator?id=${refrigerator.productID}">Edit</a>
-						&nbsp;&nbsp;&nbsp;&nbsp; <a
-						href="deleteRefrigerator?id=${refrigerator.productID}">Delete</a>
-					  <%
-					   }
-					   else{
-						   %>
-						   <form action="/hibernate-model/addToCart" method="get">
-						   <input type="hidden" name="productID" value="${refrigerator.productID}">
-						   <input type="number" name="quantity"> Quantity &nbsp;&nbsp;
-						   <input type="submit" value="Add to Cart">
-						   </form>
-						    &nbsp;&nbsp;&nbsp;&nbsp; 
-						    <form action="/hibernate-model/orderProduct" method="get">
-						   <input type="hidden" name="productID" value="${refrigerator.productID}">
-						   <input type="number" name="quantity"> Quantity &nbsp;&nbsp;
-						   <input type="submit" value="Purchase">
-						   </form>
-						   <%
-					   }
-					  %>
-				 </td>
+		<c:forEach var="refrigerator" items="${listRefrigerator}" varStatus="theCount">
+			<div class="container">
+				<div class="card mb-3" style="max-width: 100%;">
+					<div class="row g-0">
+						<div class="col-md-4 p-5">
+							<img src="${refrigerator.img}" class="img-fluid rounded-start"
+								alt="...">
+						</div>
+						<div class="col-md-8 p-5">
+							<div class="card-body">
+								<h5 class="card-title">${refrigerator.name}</h5>
+								<p class="card-text">${refrigerator.description}</p>
+								<div class="row mt-5">
+									<div class="col">
+										<p><strong>Quantity : </strong>${refrigerator.quantity}</p> 
+									</div>
+									<div class="col">
+										<p><strong>Price : </strong>${refrigerator.price}</p> 
+									</div>
+								</div>
+								<div class="accordion" id="accordionExample">
+									<div class="accordion-item">
+										<h2 class="accordion-header" id="headingOne">
+											<button class="accordion-button" type="button"
+												data-bs-toggle="collapse"
+												data-bs-target="#divIDNo${theCount.index}"
+												aria-expanded="true"
+												aria-controls="divIDNo${theCount.index}">Key
+												Features</button>
+										</h2>
+										<div id="divIDNo${theCount.index}"
+											class="accordion-collapse collapse"
+											aria-labelledby="headingOne"
+											data-bs-parent="#accordionExample">
+											<div class="accordion-body" style="color:black;">
+												<p>
+													<strong>Stars </strong>${refrigerator.stars}</p>
+												<p>
+													<strong>Cooling Technology </strong>${refrigerator.coolingTech}</p>
+												<p>
+													<strong>Colour </strong>${refrigerator.colour}</p>
+												<p>
+													<strong>Capacity </strong>${refrigerator.capacity}</p>
+												<p>
+													<strong>Dimension </strong>${refrigerator.dimension}</p>
+												<p>
+													<strong>Door Style </strong>${refrigerator.doorstyle}</p>
+											    		
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="mt-3">
 
-				</tr>
-			</c:forEach>
-		</table>
-		<h4>
-		<%
-			 if(session.getAttribute("role").equals("admin")){
-			 %>
-			   New Refrigerator Product <a href="newRefrigerator">here</a>
-			 <%
-			 }
-			 %> 
-			
-		</h4>
+									<%
+										if(session.getAttribute("role").equals("admin")){
+										%>
+										<a href="editRefrigerator?id=${refrigerator.productID}" class="btn btn-primary">Edit</a>
+											&nbsp;&nbsp;&nbsp;&nbsp; <a
+											href="deleteRefrigerator?id=${refrigerator.productID}" class="btn btn-primary">Delete</a>
+										<%
+										}
+										else{
+											%>
+											<form action="/hibernate-model/addToCart" method="get">
+											<input type="hidden" name="productID" value="${refrigerator.productID}">
+											<input style="width: 50px;" type="number" name="quantity"  min="1" max="${refrigerator.quantity}">
+											<button class="btn btn-primary">Add to Cart</button>
+											</form>
+												&nbsp;&nbsp;&nbsp;&nbsp; 
+												<form action="/hibernate-model/orderProduct" method="get">
+											<input type="hidden" name="productID" value="${refrigerator.productID}">
+											<input style="width: 50px;" type="number" name="quantity"  min="1" max="${refrigerator.quantity}">
+											<button class="btn btn-primary">Purchase</button>
+											</form>
+												
+											<%
+										}
+										%>
+									
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</c:forEach>
 	</div>
+
+	
+	
+<!-- </div>	 -->
+	<script>
+var button = document.querySelector('form[name="myform"] > button');
+button.addEventListener(function() {
+  document.querySelector("form[name="myform"]").submit();
+});
+</script>
+
 </body>
 </html>

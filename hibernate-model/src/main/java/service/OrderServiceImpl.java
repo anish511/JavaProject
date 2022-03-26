@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import dao.OrderDAO;
+import model.Customer;
 import model.Order;
 
 @Service
@@ -46,5 +47,11 @@ public class OrderServiceImpl implements OrderService{
 	public Order updateOrder(Order order) {
 		// TODO Auto-generated method stub
 		return orderDAO.updateOrder(order);
+	}
+	
+	@Override
+	@Transactional
+	public List<Order> getOrderByUser(Customer customer) {
+		return orderDAO.getOrderByUser(customer);
 	}
 }

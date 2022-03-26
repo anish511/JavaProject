@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import model.Cart;
 import model.Customer;
+import model.Order;
 import model.Product;
 import service.CartService;
 import service.CustomerService;
@@ -40,8 +41,18 @@ public class CartController {
 	private CustomerService customerService;
 	
 	@RequestMapping(value = "/myCart")
-	public ModelAndView showCart(ModelAndView model) {
-		List<Cart> listCart = cartService.getAllCarts();
+	public ModelAndView showCart(ModelAndView model,HttpServletRequest request) {
+		//List<Cart> listCart = cartService.getAllCarts();
+		HttpSession session = request.getSession();
+        List<Customer> listCustomer = customerService.checkEmail((String)session.getAttribute("email"));
+
+        // First get cart items of customer
+        List<Cart> listCart = null;
+		for(Customer c: listCustomer) {
+			listCart = cartService.getCartByUser(c);
+			break;
+		}
+		
 		model.addObject("listCart",listCart);
 		model.setViewName("Carthome");
 		return model;
@@ -74,6 +85,20 @@ public class CartController {
 			break;
 		}
 		
+		List<Cart> listCart = cartService.getCartByUser(cart.getCustomer());
+		
+		for(Cart cart1 : listCart) {
+			Product p = cart1.getProduct();
+			if(p.getProductID() == productID) {
+				int finalquantity = cart1.getQuantity() + quantity; 
+				cart1.setQuantity(finalquantity);
+				cart1.setTotalPrice(finalquantity*p.getPrice());
+				cartService.updateCart(cart1);
+				ModelAndView model = new ModelAndView("Customerhome");
+				return model;
+			}
+		}
+		
 		cart.setProduct(product);
 		cart.setQuantity(quantity);
 		cart.setTotalPrice(quantity*price);
@@ -96,7 +121,7 @@ public class CartController {
 	
 	@RequestMapping(value = "/deleteCart", method = RequestMethod.GET)
 	public ModelAndView deleteCart(HttpServletRequest request) {
-		int cartId = Integer.parseInt(request.getParameter("id"));
+		int cartId = Integer.parseInt(request.getParameter("cartId"));
 		cartService.deleteCart(cartId);
 		return new ModelAndView("redirect:/myCart");
 	}
@@ -106,8 +131,34 @@ public class CartController {
 		int cartId = Integer.parseInt(request.getParameter("cartId"));
 		int quantity = Integer.parseInt(request.getParameter("quantity"));
 		Cart cart = cartService.getCart(cartId);
+		Product p = cart.getProduct();
 		cart.setQuantity(quantity);
+		cart.setTotalPrice(quantity*p.getPrice());
 		cartService.updateCart(cart);
 		return new ModelAndView("redirect:/myCart");
+	}
+	
+	@RequestMapping(value = "/deleteAllCart")
+	public ModelAndView deleteAllCart(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+        List<Customer> listCustomer = customerService.checkEmail((String)session.getAttribute("email"));
+        
+        // First get cart items of customer
+        List<Cart> listCart = null;
+		for(Customer c: listCustomer) {
+			listCart = cartService.getCartByUser(c);
+			break;
+		}
+		
+		
+		// Get total Cost
+		for(Cart c: listCart) {
+			cartService.deleteCart(c.getCartId());
+		}
+		
+		ModelAndView model = new ModelAndView("redirect:/myCart");
+		model.addObject("listCart", listCart);
+		
+		return model;
 	}
 }

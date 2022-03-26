@@ -1,4 +1,4 @@
-<%@ page isELIgnored="False" language="java" contentType="text/html; charset=ISO-8859-1"
+<%@ page isELIgnored="false" language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>   
   
@@ -16,7 +16,7 @@
 <h1>LOGIN</h1>
 <h3>${message}</h3>
 <div>
-  <form action="CustomerLogin" method="post">
+  <form action="/hibernate-model/" method="post">
     <label for="email">Email</label>
     <input type="text" id="email" name="email" placeholder="Your Email...">
 
@@ -28,6 +28,7 @@
   </form>
   
   <a href="ForgetPassword">Forget Password</a>
+  New Customer Register <a href="Customer/newCustomer">here</a><br>
 </div>
 
 </body>

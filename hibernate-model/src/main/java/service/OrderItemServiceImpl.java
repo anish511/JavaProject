@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import dao.OrderItemDAO;
+import model.Order;
 import model.OrderItem;
 
 @Service
@@ -26,6 +27,12 @@ public class OrderItemServiceImpl implements OrderItemService{
 	@Transactional
 	public List<OrderItem> getAllOrderItems() {
 		return OrderItemDAO.getAllOrderItems();
+	}
+	
+	@Override
+	@Transactional
+	public List<OrderItem> getOrderItemByOrder(Order order) {
+		return OrderItemDAO.getOrderItemByOrder(order);
 	}
 	
 	@Override
