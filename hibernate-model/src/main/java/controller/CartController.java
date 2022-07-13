@@ -94,7 +94,7 @@ public class CartController {
 				cart1.setQuantity(finalquantity);
 				cart1.setTotalPrice(finalquantity*p.getPrice());
 				cartService.updateCart(cart1);
-				ModelAndView model = new ModelAndView("Customerhome");
+				ModelAndView model = new ModelAndView("redirect:/myCart");;
 				return model;
 			}
 		}
@@ -105,7 +105,7 @@ public class CartController {
 		
 		cartService.addCart(cart);
 		
-		ModelAndView model = new ModelAndView("Customerhome");
+		ModelAndView model = new ModelAndView("redirect:/myCart");;
 		return model;
 	}
 	

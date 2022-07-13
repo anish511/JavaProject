@@ -1,0 +1,31 @@
+@charset "ISO-8859-1";
+
+body{
+	background: #0a2a43!important;
+	color: white!important;
+}
+
+table{
+	
+	/* background: linear-gradient(45deg, #49a09d, #5f2c82); */
+	background:  linear-gradient(45deg, #cff3f2, #4ba6db);
+  font-family: sans-serif;
+  font-weight: 100;
+}
+
+th,
+td {
+  padding: 15px;
+  background-color: rgba(255,255,255,0.2);
+  color: black;
+}
+
+
+  th{
+    background-color: black;
+    color: white;
+  }
+
+ tr:hover {
+      background-color: rgba(255,255,255,0.3);
+    }

@@ -10,6 +10,7 @@
 <title>My Cart</title>
 
 <style>
+
 .card:hover {
 	background: white;
 	box-shadow: 0px 15px 26px rgba(0, 0, 0, 0.8);
@@ -39,6 +40,9 @@ background: #c9e2f3!important;
 	<!-- <div align="center" class="container col-8 mt-5">
 	
 	</div> -->
+	<div align="center" class="mb-5" style="margin-top: 20vh !important;">
+			<h2 class="mt-5">Your Carts are waiting for you...</h2>
+		</div>
 	
 	<div class="container col-8 mt-5" style="margin-top: 15vh !important;">        
         <c:if test = "${not empty cart_success}">
@@ -56,12 +60,16 @@ background: #c9e2f3!important;
 			</div>
         </c:if>
         
-        <div class="container col-8 mt-5" style="margin-top: 15vh !important;">        
+        <div class="container col-8 mt-5" style="margin-top: 5vh !important;">        
         <c:if test = "${not empty listCart}">
-			<div class="container col-3 mb-4">
+			<div class="container col-12 mb-4">
 				<div class="row">
-					<div class="col"><a class="btn btn-primary" href="/hibernate-model/orderCart/">Purchase</a></div>
-					<div class="col"><a class="btn btn-primary" href="/hibernate-model/deleteAllCart/">Clear Cart</a></div>
+				    <div class="col-8"><form action="/hibernate-model/paymentCart" method="get">
+											<strong>Shipping Address: </strong><input style="width: 300px; height: 50px" type="textarea" name="shippingAddress" placeholder="Enter Shipping Address">
+											<button class="btn btn-primary">Purchase</button>
+											</form>
+					</div>
+					<div class="col-4 mt-2"><a class="btn btn-danger" href="/hibernate-model/deleteAllCart/">Clear Cart</a></div>
 				</div>
 			</div>
         </c:if>
@@ -69,7 +77,7 @@ background: #c9e2f3!important;
 	
 	<c:forEach var="cart" items="${listCart}" varStatus="theCount">
 		<div class="container mt-3 col-8">
-			<div class="card mb-3">
+			<div class="card mb-3" style="border-radius: 100px;">
 				<div class="row g-0">
 					<div class="col-md-4 p-5">
 						<img src="${cart.product.img}" class="img-fluid rounded-start"
@@ -99,7 +107,7 @@ background: #c9e2f3!important;
 									</form>
 									<form method="GET" action="/hibernate-model/deleteCart" class="col">
 											<input type="hidden" name="cartId" value="${cart.cartId}">
-											<button class="btn btn-primary">Delete</button>
+											<button class="btn btn-danger">Delete</button>
 									</form>
 								</div>
 							</div>
@@ -122,3 +130,4 @@ button.addEventListener(function() {
 
 </body>
 </html>
+<%@ include file = "Footer.jsp" %>

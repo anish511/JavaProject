@@ -38,6 +38,10 @@
 						href="/hibernate-model/myCart/">My Cart</a></li>
 					<li class="nav-item"><a class="nav-link"
 						href="/hibernate-model/showOrder/">My Order</a></li>
+						<li class="nav-item"><a class="nav-link"
+						href="/hibernate-model/about">About Us</a></li>
+						<li class="nav-item"><a class="nav-link"
+						href="/hibernate-model/contact">Contact Us</a></li>
 					<li class="nav-item"><a class="nav-link"
 						href="/hibernate-model/logout/">Logout</a></li>
 					<li class="nav-item dropdown"><a
@@ -50,6 +54,7 @@
 							<li><a class="dropdown-item" href="/hibernate-model/Television/">Television</a></li>
 							<li><a class="dropdown-item" href="/hibernate-model/Refrigerator/">Refrigerator</a></li>
 							<li><a class="dropdown-item" href="/hibernate-model/Mouse/">Mouse</a></li>
+							<li><a class="dropdown-item" href="/hibernate-model/Smartwatch/">Smart Watch</a></li>
 							<li><hr class="dropdown-divider"></li>
 							<li><a class="dropdown-item" href="#">Something else
 									here</a></li>

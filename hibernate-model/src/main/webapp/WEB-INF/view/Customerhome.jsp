@@ -174,7 +174,7 @@
                         <h2>06</h2>
                         <h3>Smart Watch</h3>
                         <p>Get Exclusive Smart Watch at best price here only</p>
-                        <a href="/hibernate-model/SmartWatch/">Purchase Now</a>
+                        <a href="/hibernate-model/Smartwatch/">Purchase Now</a>
                     </div>
                 </div>
             </div>
@@ -221,3 +221,4 @@
 	
 </body>
 </html>
+<%@ include file = "Footer.jsp" %>

@@ -68,7 +68,7 @@ public class CustomerController {
 				}
 			}
 			customerService.updateCustomer(customer);
-			ModelAndView model = new ModelAndView("CustomerForm");
+			ModelAndView model = new ModelAndView("UpdateCustomer");
 			model.addObject(customer);
 			model.addObject("message", "Successfully...Updated Profile");
 			return model;

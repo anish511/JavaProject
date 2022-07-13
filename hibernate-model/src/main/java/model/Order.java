@@ -23,6 +23,9 @@ public class Order implements Serializable{
 	private String orderDate;
 	
 	@Column
+	private String shippingAddress;
+	
+	@Column
 	private double orderCost;
 	
 	@ManyToOne(cascade = CascadeType.ALL)
@@ -59,5 +62,14 @@ public class Order implements Serializable{
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
 	}
+
+	public String getShippingAddress() {
+		return shippingAddress;
+	}
+
+	public void setShippingAddress(String shippingAddress) {
+		this.shippingAddress = shippingAddress;
+	}
+	
 	
 }

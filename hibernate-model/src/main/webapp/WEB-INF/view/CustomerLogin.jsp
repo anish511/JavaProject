@@ -8,28 +8,56 @@
 
 <meta charset="ISO-8859-1">
 <title>Login Page</title>
-<link rel="stylesheet" href="<c:url value="/resources/css/login.css" />" />
+<link rel="stylesheet" href="<c:url value="/resources/css/sample.css" />" />
 </head>
 <body>
-
-
-<h1>LOGIN</h1>
-<h3>${message}</h3>
-<div>
-  <form action="/hibernate-model/" method="post">
-    <label for="email">Email</label>
-    <input type="text" id="email" name="email" placeholder="Your Email...">
-
-    <label for="password">password</label>
-    <input type="password" id="password" name="password" placeholder="Your Password...">
-
-  
-    <input type="submit" value="Submit">
-  </form>
-  
-  <a href="ForgetPassword">Forget Password</a>
-  New Customer Register <a href="Customer/newCustomer">here</a><br>
+<c:if test="${not empty message}">
+    <div class="noti1">
+      <strong>${message} </strong> 
 </div>
+</c:if>
 
+
+<div class="login-box">
+ <h2>Login</h2>
+  <form action="/hibernate-model/" id="login" method="post">
+  <div class="user-box">
+    <input type="text" id="email" name="email">
+    <label for="email">Email</label>
+  </div>
+
+   <div class="user-box">
+    <input type="password" id="password" name="password">
+    <label for="password">Password</label>
+  </div>
+  <a href="#" onclick="myFunction()">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        Submit
+      </a>
+    
+    <a href="/hibernate-model/ForgetPassword"> <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        Forget Password
+   </a>
+   <a href="/hibernate-model/Customer/newCustomer">
+       <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+       New Customer here
+   </a>
+  </form>
+
+</div>
+<script>
+            function myFunction() {
+                document.getElementById("login").submit();
+            }
+        </script>
 </body>
 </html>

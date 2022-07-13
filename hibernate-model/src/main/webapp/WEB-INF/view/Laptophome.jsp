@@ -73,7 +73,7 @@ background: #c9e2f3!important;
 
 		<c:forEach var="laptop" items="${listLaptop}" varStatus="theCount">
 			<div class="container">
-				<div class="card mb-3" style="max-width: 100%;">
+				<div class="card mb-3" style="max-width: 100%;border-radius: 100px;">
 					<div class="row g-0">
 						<div class="col-md-4 p-5">
 							<img src="${laptop.img}" class="img-fluid rounded-start"
@@ -136,13 +136,14 @@ background: #c9e2f3!important;
 											%>
 											<form action="/hibernate-model/addToCart" method="get">
 											<input type="hidden" name="productID" value="${laptop.productID}">
-											<input style="width: 50px;" type="number" name="quantity"  min="1" max="${laptop.quantity}">
+											<strong>Quantity: </strong><input style="width: 50px;" type="number" name="quantity" value=1  min="1" max="${laptop.quantity}">
 											<button class="btn btn-primary">Add to Cart</button>
 											</form>
 												&nbsp;&nbsp;&nbsp;&nbsp; 
-												<form action="/hibernate-model/orderProduct" method="get">
+												<form action="/hibernate-model/paymentProduct" method="get">
 											<input type="hidden" name="productID" value="${laptop.productID}">
-											<input style="width: 50px;" type="number" name="quantity"  min="1" max="${laptop.quantity}">
+											<strong>Quantity: </strong><input style="width: 50px;" type="number" name="quantity" placeholder="Enter Quantity" value=1  min="1" max="${laptop.quantity}"><br>
+											<strong>Shipping Address: </strong><input style="width: 300px; height: 50px" type="textarea" name="shippingAddress" placeholder="Enter Shipping Address"><br>
 											<button class="btn btn-primary">Purchase</button>
 											</form>
 												
@@ -171,3 +172,4 @@ button.addEventListener(function() {
 
 </body>
 </html>
+<%@ include file = "Footer.jsp" %> 

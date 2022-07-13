@@ -47,7 +47,7 @@ public class OrderDAOImpl implements OrderDAO{
 	}
 	
 	public List<Order> getOrderByUser(Customer customer){
-		String sql = "SELECT * FROM Orders WHERE customer_id = :e_nm";
+		String sql = "SELECT * FROM Orders WHERE customer_id = :e_nm ORDER BY orderId ASC";
 		SQLQuery query = sessionFactory.getCurrentSession().createSQLQuery(sql);
 		query.addEntity(Order.class);
 		query.setParameter("e_nm", customer.getId());

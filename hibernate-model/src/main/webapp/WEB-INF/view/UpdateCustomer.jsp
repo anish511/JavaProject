@@ -26,7 +26,7 @@
 	src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
 <style>
 body {
-	background: rgb(99, 39, 120)
+	background: #0a2a43!important
 }
 
 .form-control:focus {
@@ -35,22 +35,22 @@ body {
 }
 
 .profile-button {
-	background: rgb(99, 39, 120);
+	background: rgb(90,163,223)!important;
 	box-shadow: none;
 	border: none
 }
 
 .profile-button:hover {
-	background: #682773
+	background: #0a2a43!important;
 }
 
 .profile-button:focus {
-	background: #682773;
+	background: #0a2a43!important;
 	box-shadow: none
 }
 
 .profile-button:active {
-	background: #682773;
+	background: #0a2a43!important;
 	box-shadow: none
 }
 
@@ -71,14 +71,14 @@ body {
 }
 
 .navbar {
-background-color:rgb(90,163,223)!important
+background-color:rgb(0,0,0)!important
 }
 </style>
 <script>var elements = document.getElementsByTagName("*");
 for(var id = 0; id < elements.length; ++id) { elements[id].oncontextmenu = null; }</script>
 </head>
 <body oncontextmenu='return false' class='snippet-body'>
-	<nav class="navbar navbar-expand-lg  navbar-light bg-light">
+	<nav class="navbar navbar-expand-lg  navbar-dark bg-dark fixed-top">
 		<div class="container-fluid">
 			<a class="navbar-brand" href="#"></a>
 			<button class="navbar-toggler" type="button"
@@ -98,10 +98,14 @@ for(var id = 0; id < elements.length; ++id) { elements[id].oncontextmenu = null;
 					<li class="nav-item dropdown"><a
 						class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
 						role="button" data-bs-toggle="dropdown" aria-expanded="false">
-							Dropdown </a>
+							Product </a>
 						<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-							<li><a class="dropdown-item" href="#">Action</a></li>
-							<li><a class="dropdown-item" href="#">Another action</a></li>
+							<li><a class="dropdown-item" href="/hibernate-model/Laptop/">Laptop</a></li>
+							<li><a class="dropdown-item" href="/hibernate-model/Phone/">Phone</a></li>
+							<li><a class="dropdown-item" href="/hibernate-model/Television/">Television</a></li>
+							<li><a class="dropdown-item" href="/hibernate-model/Refrigerator/">Refrigerator</a></li>
+							<li><a class="dropdown-item" href="/hibernate-model/Mouse/">Mouse</a></li>
+							<li><a class="dropdown-item" href="/hibernate-model/Smartwatch/">Smart Watch</a></li>
 							<li><hr class="dropdown-divider"></li>
 							<li><a class="dropdown-item" href="#">Something else
 									here</a></li>
@@ -212,3 +216,4 @@ for(var id = 0; id < elements.length; ++id) { elements[id].oncontextmenu = null;
 
 </body>
 </html>
+<%@ include file = "Footer.jsp" %>

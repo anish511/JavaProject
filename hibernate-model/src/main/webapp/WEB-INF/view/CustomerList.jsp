@@ -5,12 +5,13 @@
 <%@ include file = "adminNavbar.jsp" %>
 <html>
 <head>
-
+<link rel="stylesheet"
+	href="<c:url value='/resources/css/showCustomer.css'/>" />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Customer Management Screen</title>
 </head>
 <body>
-	<div align="center">
+	<div align="center" style="margin-top:100px; margin-bottom:100px;">
 		<h1>Customer List</h1>
 		
 		<table border="1">
@@ -40,3 +41,4 @@
 	</div>
 </body>
 </html>
+ <%@ include file = "Footer.jsp" %> 
